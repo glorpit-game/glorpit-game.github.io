@@ -1,131 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Glorpit • Stats</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glorpit Stats</title>
+    <style>
         body {
             margin: 0;
+            padding: 0;
+            display: flex;
             font-family: Arial, sans-serif;
-            background: #c6ffad;
+            background: #2e2e2e url('bg.png');
+            background-size: 200px;
+            color: white;
+        }
+
+        /* SIDEBAR (kept same as your previous one) */
+        .sidebar {
+            width: 230px;
+            background: #1a1a1a;
+            padding-top: 20px;
             height: 100vh;
             display: flex;
-            overflow: hidden;
-        }
-        .sidebar {
-            width: 240px;
-            background: #000;
-            color: #fff;
-            padding: 30px 20px;
-            display: flex;
             flex-direction: column;
-            box-sizing: border-box;
+            border-right: 3px solid #00ff6a;
         }
+
         .sidebar h2 {
-            margin-top: 0;
-            font-size: 28px;
-            font-weight: bold;
-            color: #c6ffad;
+            text-align: center;
+            color: #00ff88;
+            margin-bottom: 30px;
         }
+
         .sidebar a {
-            color: #c6ffad;
+            padding: 15px 25px;
+            color: white;
             text-decoration: none;
-            font-size: 20px;
-            margin: 14px 0;
-            display: block;
+            font-size: 18px;
+            border-bottom: 1px solid #2e2e2e;
+            transition: 0.2s;
         }
-        .content {
+
+        .sidebar a:hover {
+            background: #00ff6a;
+            color: #000;
+        }
+
+        /* MAIN PAGE AREA */
+        .main {
             flex: 1;
             padding: 40px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow-y: auto;
         }
-        .profile-box {
-            background: #000;
-            color: #c6ffad;
-            padding: 25px;
-            border-radius: 14px;
+
+        .user-card {
+            background: linear-gradient(#1f1f1f, #222);
+            border: 3px solid #00ff70;
+            padding: 20px;
             display: flex;
             align-items: center;
-            gap: 22px;
-            width: 100%;
-            max-width: 600px;
+            border-radius: 15px;
+            width: 95%;
+            margin-bottom: 30px;
         }
-        .profile-box img {
-            width: 95px;
-            height: 95px;
-            border-radius: 10px;
+
+        .pfp {
+            width: 90px;
+            height: 90px;
+            border-radius: 15px;
+            background: #00ff80;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: #004d1f;
+            margin-right: 20px;
+            border: 3px solid white;
         }
-        .stats-box {
-            margin-top: 25px;
-            background: #000;
-            color: #c6ffad;
-            padding: 25px;
-            border-radius: 14px;
-            width: 100%;
-            max-width: 600px;
+
+        .user-info {
+            font-size: 20px;
+        }
+
+        .stats-panel {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #00ff70;
+            width: 95%;
+        }
+
+        .stats-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #00ff8d;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: #252525;
+            border: 3px solid #00ff70;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #00ff9a;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-  <div class="sidebar">
-    <h2>Glorpit</h2>
-    <a class="nav-item" href="#">Stats</a>
-    <a class="nav-item" href="#">Chat</a>
-    <a class="nav-item" href="#">Glorps</a>
-    <a class="nav-item" href="#">Market</a>
-    <a class="nav-item" href="#">Settings</a>
-  </div>
-
-  <div class="main">
-    <div class="profile">
-      <img class="pfp" id="pfp" src="default.png" alt="PFP">
-      <div class="username" id="username">Username</div>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>Glorpit</h2>
+        <a href="#">Stats</a>
+        <a href="#">Chat</a>
+        <a href="#">Glorps</a>
+        <a href="#">Market</a>
+        <a href="#">Settings</a>
     </div>
 
-    <div class="stats-box">
-      <div class="stat"><span>Messages Sent</span><span id="stat-messages">0</span></div>
-      <div class="stat"><span>Packs Opened</span><span id="stat-packs">0</span></div>
-      <div class="stat"><span>Glorps Owned</span><span id="stat-glorps">0</span></div>
-      <div class="stat"><span>Trades Made</span><span id="stat-trades">0</span></div>
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <!-- User header -->
+        <div class="user-card">
+            <div class="pfp">G</div>
+            <div class="user-info">
+                <div id="usernameDisplay">Username</div>
+                <small style="opacity: 0.8;">Player</small>
+            </div>
+        </div>
+
+        <!-- Stats section -->
+        <div class="stats-panel">
+            <div class="stats-title">Stats</div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Tokens</div>
+                    <div class="stat-value" id="statTokens">0</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-label">Glorps Unlocked</div>
+                    <div class="stat-value" id="statGlorps">0 / 0</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-label">Packs Opened</div>
+                    <div class="stat-value" id="statPacks">0</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-label">Messages Sent</div>
+                    <div class="stat-value" id="statMessages">0</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // Load logged in username
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    const users = JSON.parse(localStorage.getItem("users")) || {};
 
-    if (!loggedInUser || !users[loggedInUser]) {
-      alert("You must be logged in to view this page.");
-      window.location.href = "login.html";
-    }
+<script>
+    // Load user data from localStorage
+    const username = localStorage.getItem("loggedInUser");
+    document.getElementById("usernameDisplay").innerText = username ?? "Username";
 
-    document.getElementById("username").textContent = loggedInUser;
+    // Default stats if none stored yet
+    const stats = JSON.parse(localStorage.getItem(username + "_stats")) || {
+        tokens: 0,
+        glorpsUnlocked: 0,
+        totalGlorps: 0,
+        packsOpened: 0,
+        messagesSent: 0
+    };
 
-    // Default stats for new user
-    if (!users[loggedInUser].stats) {
-      users[loggedInUser].stats = {
-        messages: 0,
-        packs: 0,
-        glorps: 0,
-        trades: 0
-      };
-      localStorage.setItem("users", JSON.stringify(users));
-    }
-
-    const stats = users[loggedInUser].stats;
-
-    document.getElementById("stat-messages").textContent = stats.messages;
-    document.getElementById("stat-packs").textContent = stats.packs;
-    document.getElementById("stat-glorps").textContent = stats.glorps;
-    document.getElementById("stat-trades").textContent = stats.trades;
-  </script>
+    // Display stats
+    document.getElementById("statTokens").innerText = stats.tokens;
+    document.getElementById("statGlorps").innerText = stats.glorpsUnlocked + " / " + stats.totalGlorps;
+    document.getElementById("statPacks").innerText = stats.packsOpened;
+    document.getElementById("statMessages").innerText = stats.messagesSent;
+</script>
 
 </body>
 </html>

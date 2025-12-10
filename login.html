@@ -26,5 +26,28 @@ body {margin: 0;font-family: Arial, sans-serif;background: #b4ff9d;color: #fff;d
 <a href="register.html">Don't have an account? Register</a>
 </div>
 </div>
+
+    <script>
+  const users = JSON.parse(localStorage.getItem("users")) || {};
+
+  document.querySelector("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const username = document.querySelectorAll("input")[0].value.trim();
+    const password = document.querySelectorAll("input")[1].value;
+    if (!users[username]) {
+      alert("User does not exist.");
+      return;
+    }    if (users[username].password !== password) {
+      alert("Incorrect password.");
+      return;
+    }
+    localStorage.setItem("loggedInUser", username);
+
+    alert("Login successful!");
+    window.location.href = "stats.html";
+  });
+</script>
+
 </body>
 </html>
